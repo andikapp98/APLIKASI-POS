@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'photo',
     ];
 
     /**
@@ -45,5 +47,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Accessor untuk mengubah thumbnail menjadi URL publik
+    public function getPhotoAttribute($value){
+        if (!$value) {
+            return null;
+        }
+        return url(Storage::url($value));
+    }
+
+    public function merchant(){
+        return $this->hasOne(Merchant::class, 'keeper_id');
     }
 }
