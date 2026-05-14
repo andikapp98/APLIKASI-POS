@@ -1,52 +1,259 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi POS (Point of Sale)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Point of Sale (POS) berbasis web yang dibangun dengan Laravel untuk mengelola penjualan, inventori, dan operasional bisnis retail.
 
-## About Laravel
+## 🚀 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Manajemen Produk
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- ✅ Kategori produk dengan foto
+- ✅ Data produk lengkap (nama, deskripsi, harga, stok)
+- ✅ Manajemen inventori per gudang
+- ✅ Produk merchant (untuk multi-vendor)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Manajemen Gudang
 
-## Learning Laravel
+- ✅ Multi-gudang support
+- ✅ Tracking stok per gudang
+- ✅ Transfer produk antar gudang
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Sistem Transaksi
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- ✅ Pencatatan transaksi penjualan
+- ✅ Detail produk per transaksi
+- ✅ History transaksi lengkap
 
-## Laravel Sponsors
+### Manajemen User & Merchant
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- ✅ Sistem autentikasi user
+- ✅ Profil merchant
+- ✅ Multi-merchant support
 
-### Premium Partners
+## 🛠️ Tech Stack
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **Backend**: Laravel 11.x
+- **Database**: MySQL/PostgreSQL
+- **Frontend**: Blade Templates + Vite
+- **Styling**: Tailwind CSS (via Vite)
+- **Authentication**: Laravel Sanctum/Breeze
 
-## Contributing
+## 📋 Persyaratan Sistem
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP 8.2 atau lebih tinggi
+- Composer
+- Node.js & NPM
+- MySQL/PostgreSQL
+- Git
 
-## Code of Conduct
+## 🚀 Instalasi
+
+### 1. Clone Repository
+
+```bash
+git clone <repository-url>
+cd AplikasiPOS
+```
+
+### 2. Install Dependencies PHP
+
+```bash
+composer install
+```
+
+### 3. Install Dependencies JavaScript
+
+```bash
+npm install
+```
+
+### 4. Setup Environment
+
+```bash
+cp .env.example .env
+```
+
+Edit file `.env` dan konfigurasikan:
+
+```env
+APP_NAME="Aplikasi POS"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=aplikasi_pos
+DB_USERNAME=root
+DB_PASSWORD=
+
+# Storage untuk foto kategori
+FILESYSTEM_DISK=public
+```
+
+### 5. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 6. Setup Database
+
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+### 7. Build Assets
+
+```bash
+npm run build
+# atau untuk development
+npm run dev
+```
+
+### 8. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Aplikasi akan berjalan di `http://localhost:8000`
+
+## 📁 Struktur Proyek
+
+```
+app/
+├── Http/
+│   ├── Controllers/     # Controller untuk API/Web
+│   ├── Requests/        # Form validation requests
+│   └── Resources/       # API Resources
+├── Models/              # Eloquent Models
+│   ├── Category.php
+│   ├── Product.php
+│   ├── Warehouse.php
+│   ├── Merchant.php
+│   ├── Transaction.php
+│   └── User.php
+├── Repositories/        # Repository pattern
+├── Services/           # Business logic layer
+└── Providers/
+
+database/
+├── migrations/         # Database migrations
+├── seeders/           # Database seeders
+└── factories/         # Model factories
+
+resources/
+├── js/                # JavaScript/Vue files
+├── css/               # Stylesheets
+└── views/             # Blade templates
+
+routes/
+├── web.php            # Web routes
+└── api.php            # API routes
+```
+
+## 🔧 Konfigurasi
+
+### Environment Variables
+
+File `.env` berisi konfigurasi penting:
+
+- Database connection
+- Mail configuration
+- Storage configuration
+- Cache & session drivers
+
+### Storage Link
+
+Untuk mengakses file upload (foto kategori):
+
+```bash
+php artisan storage:link
+```
+
+## 📊 Database Schema
+
+### Tabel Utama
+
+- `users` - Data pengguna
+- `categories` - Kategori produk
+- `products` - Data produk
+- `warehouses` - Data gudang
+- `warehouse_products` - Stok produk per gudang
+- `merchants` - Data merchant/vendor
+- `merchant_products` - Produk per merchant
+- `transactions` - Header transaksi
+- `transaction_products` - Detail produk per transaksi
+
+## 🧪 Testing
+
+Jalankan test suite:
+
+```bash
+php artisan test
+```
+
+Atau dengan coverage:
+
+```bash
+php artisan test --coverage
+```
+
+## 📚 API Documentation
+
+### Endpoints Utama
+
+#### Categories
+
+- `GET /api/categories` - List semua kategori
+- `POST /api/categories` - Buat kategori baru
+- `GET /api/categories/{id}` - Detail kategori
+- `PUT /api/categories/{id}` - Update kategori
+- `DELETE /api/categories/{id}` - Hapus kategori
+
+#### Products
+
+- `GET /api/products` - List semua produk
+- `POST /api/products` - Buat produk baru
+- `GET /api/products/{id}` - Detail produk
+- `PUT /api/products/{id}` - Update produk
+- `DELETE /api/products/{id}` - Hapus produk
+
+#### Transactions
+
+- `GET /api/transactions` - List semua transaksi
+- `POST /api/transactions` - Buat transaksi baru
+- `GET /api/transactions/{id}` - Detail transaksi
+
+## 🤝 Contributing
+
+1. Fork repository
+2. Buat feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## 👥 Authors
+
+- **Developer Name** - _Initial work_ - [GitHub Profile](https://github.com/username)
+
+## 🙏 Acknowledgments
+
+- Laravel Framework
+- Tailwind CSS
+- Font Awesome
+- Dan komunitas open source lainnya
+
+---
+
+**Catatan**: Dokumentasi ini masih dalam pengembangan. Untuk informasi lebih detail, silakan lihat kode sumber atau hubungi tim development.
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
